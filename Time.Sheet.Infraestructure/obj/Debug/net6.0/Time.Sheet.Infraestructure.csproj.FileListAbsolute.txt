@@ -1,0 +1,15 @@
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\bin\Debug\net6.0\Time.Sheet.Infraestructure.deps.json
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\bin\Debug\net6.0\Time.Sheet.Infraestructure.dll
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\bin\Debug\net6.0\Time.Sheet.Infraestructure.pdb
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\bin\Debug\net6.0\Time.Sheet.Domain.dll
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\bin\Debug\net6.0\Time.Sheet.Domain.pdb
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.csproj.AssemblyReference.cache
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.AssemblyInfoInputs.cache
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.AssemblyInfo.cs
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.csproj.CopyComplete
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.dll
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\refint\Time.Sheet.Infraestructure.dll
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\Time.Sheet.Infraestructure.pdb
+C:\Users\Guilherme\Documents\Desafio-Ilia\Time.Sheet.Infraestructure\obj\Debug\net6.0\ref\Time.Sheet.Infraestructure.dll

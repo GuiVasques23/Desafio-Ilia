@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Time.Sheet.Domain.Repositories;
+using Time.Sheet.Application.Services;
 using Time.Sheet.Domain.Services;
+using Time.Sheet.Infraestructure;
+using Time.Sheet.Infraestructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // Configuração do banco de dados
+builder.Services.AddDbContext<PontoDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 

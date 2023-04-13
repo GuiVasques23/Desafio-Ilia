@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Api", "TimeSheet.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Time.Sheet.Domain", "Time.Sheet.Domain\Time.Sheet.Domain.csproj", "{9C152909-E341-4E5A-85DB-E7A7849BBA30}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Time.Sheet.Infraestructure", "Time.Sheet.Infraestructure\Time.Sheet.Infraestructure.csproj", "{4782F443-4B5E-4D18-AECD-AE176C10E771}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.Sheet.Application", "Time.Sheet.Application\Time.Sheet.Application.csproj", "{2A07775E-E937-4D53-B942-3D77A681A0BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9C152909-E341-4E5A-85DB-E7A7849BBA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C152909-E341-4E5A-85DB-E7A7849BBA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C152909-E341-4E5A-85DB-E7A7849BBA30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4782F443-4B5E-4D18-AECD-AE176C10E771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4782F443-4B5E-4D18-AECD-AE176C10E771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4782F443-4B5E-4D18-AECD-AE176C10E771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4782F443-4B5E-4D18-AECD-AE176C10E771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A07775E-E937-4D53-B942-3D77A681A0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A07775E-E937-4D53-B942-3D77A681A0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A07775E-E937-4D53-B942-3D77A681A0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A07775E-E937-4D53-B942-3D77A681A0BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,0 @@
-C:\Users\Guilherme\Documents\Teste Ilia\Desafio-Ilia\Desafio_Ilia\Time.Sheet.Infra\obj\Debug\net6.0\Time.Sheet.Infra.csproj.AssemblyReference.cache
-C:\Users\Guilherme\Documents\Teste Ilia\Desafio-Ilia\Desafio_Ilia\Time.Sheet.Infra\obj\Debug\net6.0\Time.Sheet.Infra.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Guilherme\Documents\Teste Ilia\Desafio-Ilia\Desafio_Ilia\Time.Sheet.Infra\obj\Debug\net6.0\Time.Sheet.Infra.AssemblyInfoInputs.cache
-C:\Users\Guilherme\Documents\Teste Ilia\Desafio-Ilia\Desafio_Ilia\Time.Sheet.Infra\obj\Debug\net6.0\Time.Sheet.Infra.AssemblyInfo.cs
-C:\Users\Guilherme\Documents\Teste Ilia\Desafio-Ilia\Desafio_Ilia\Time.Sheet.Infra\obj\Debug\net6.0\Time.Sheet.Infra.csproj.CoreCompileInputs.cache
