@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using Time.Sheet.Domain.Models;
-using Microsoft.Win32;
 using Time.Sheet.Domain.Services;
+using Time.Sheet.Domain.Utils;
 
 namespace Time.Sheet.Api.Controllers
 {
@@ -23,23 +21,21 @@ namespace Time.Sheet.Api.Controllers
         [HttpPost("batidas")]
         public async Task<IActionResult> InsereBatida([FromBody] Momento momento)
         {
-            try
+            ResponseResult responseResult = await _batidasService.InserirBatidaAsync(momento);
+
+            if (responseResult.StatusCode == 201)
             {
-                var registro = await _batidasService.InserirBatidaAsync(momento);
-                return CreatedAtAction(nameof(ObterRegistroPorId), new { id = registro.Id }, registro);
+                return Created("",responseResult.Content);
             }
-            catch (ArgumentException ex)
             {
-                return BadRequest(new Mensagem { Texto = ex.Message });
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
+                int statusCode = responseResult.StatusCode;
+                string errorMessage = responseResult.Content;
+                return StatusCode(statusCode, new { message = errorMessage });
             }
         }
 
         [HttpGet("folhas-de-ponto/{mes}")]
-        public async Task<IActionResult> ObterFolhaDePontoPorMes(DateTime mes)
+        public async Task<IActionResult> ObterFolhaDePontoPorMes(string mes)
         {
             try
             {
@@ -49,24 +45,6 @@ namespace Time.Sheet.Api.Controllers
                     return NotFound();
                 }
                 return Ok(folhaDePonto);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
-
-        [HttpGet("registros/{id}")]
-        public async Task<IActionResult> ObterRegistroPorId(int id)
-        {
-            try
-            {
-                var registro = await _batidasService.ObterRegistroPorIdAsync(id);
-                if (registro == null)
-                {
-                    return NotFound();
-                }
-                return Ok(registro);
             }
             catch (Exception)
             {

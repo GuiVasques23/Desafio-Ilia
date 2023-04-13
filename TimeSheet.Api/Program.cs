@@ -1,13 +1,16 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using Time.Sheet.Infra;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Time.Sheet.Domain.Repositories;
+using Time.Sheet.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Registro do serviço IBatidasService
+builder.Services.AddScoped<IBatidasService, BatidasService>();
+// Registro do serviço IFolhaDePontoService
+builder.Services.AddScoped<IFolhasDePontoService, FolhasDePontoService>();
+// Registro do serviço IRegistrosRepository
+builder.Services.AddScoped<IRegistrosRepository, RegistrosRepository>();
 
 
 builder.Services.AddControllers();
@@ -15,10 +18,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // Configuração do banco de dados
-builder.Services.AddDbContext<PontoDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+
+//Adionar Swagger
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -27,7 +30,8 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Habilita o middleware do Swagger
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

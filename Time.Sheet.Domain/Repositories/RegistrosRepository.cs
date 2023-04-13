@@ -1,59 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Time.Sheet.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Time.Sheet.Domain.Repositories
 {
     public class RegistrosRepository : IRegistrosRepository
     {
-        private readonly PontoDbContext _dbContext;
-
-        public RegistrosRepository(PontoDbContext dbContext)
+        public Task InserirAsync(Registro horario)
         {
-            _dbContext = dbContext;
+            throw new NotImplementedException();
         }
 
-        public async Task InserirAsync(Registro registro)
+        public Task<Registro> ObterRegistroPorDiaAsync(DateTime dia)
         {
-            await _dbContext.Registros.AddAsync(registro);
-            await _dbContext.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task AtualizarAsync(Registro registro)
+        public Task<IEnumerable<Registro>> ObterRegistrosMensaisAsync(string mes)
         {
-            _dbContext.Entry(registro).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task ExcluirAsync(int id)
+        public Task UpdateAsync(Registro registro)
         {
-            var registro = await ObterPorIdAsync(id);
-            if (registro != null)
-            {
-                _dbContext.Registros.Remove(registro);
-                await _dbContext.SaveChangesAsync();
-            }
-        }
-
-        public async Task<IEnumerable<Registro>> ObterRegistrosMensaisAsync(DateTime mes)
-        {
-            return await _dbContext.Registros
-                .Where(r => r.Dia.Year == mes.Year && r.Dia.Month == mes.Month)
-                .ToListAsync();
-        }
-
-        public async Task<Registro> ObterRegistroPorDiaAsync(DateTime dia)
-        {
-            return await _dbContext.Registros
-                .Include(r => r.Horarios)
-                .FirstOrDefaultAsync(r => r.Dia == dia);
-        }
-
-        public async Task<Registro> ObterPorIdAsync(int id)
-        {
-            return await _dbContext.Registros.FindAsync(id);
+            throw new NotImplementedException();
         }
     }
 }

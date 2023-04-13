@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Time.Sheet.Domain.Models
+﻿namespace Time.Sheet.Domain.Models
 {
     public class Horario
     {
         public int Id { get; set; }
-        public DateTime DataHora { get; set; }
+        public TimeSpan DataHora { get; set; }
         public TipoHorario Tipo { get; set; }
-        public Registro Registro { get; set; }
 
         public Horario() { }
 
-        public Horario(DateTime dataHora)
+        public Horario(TimeSpan dataHora)
         {
             DataHora = dataHora;
-            Tipo = ObterTipoHorario(dataHora.TimeOfDay);
+            Tipo = ObterTipoHorario(dataHora);
         }
 
         private TipoHorario ObterTipoHorario(TimeSpan hora)

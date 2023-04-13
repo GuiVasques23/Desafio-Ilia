@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Guilherme\\Documents\\Teste Ilia\\Desafio-Ilia\\Desafio_Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj": {}
+    "C:\\Users\\Guilherme\\Documents\\Desafio-Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Guilherme\\Documents\\Teste Ilia\\Desafio-Ilia\\Desafio_Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj": {
+    "C:\\Users\\Guilherme\\Documents\\Desafio-Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Guilherme\\Documents\\Teste Ilia\\Desafio-Ilia\\Desafio_Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\Documents\\Desafio-Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj",
         "projectName": "Time.Sheet.Domain",
-        "projectPath": "C:\\Users\\Guilherme\\Documents\\Teste Ilia\\Desafio-Ilia\\Desafio_Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj",
+        "projectPath": "C:\\Users\\Guilherme\\Documents\\Desafio-Ilia\\Time.Sheet.Domain\\Time.Sheet.Domain.csproj",
         "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Guilherme\\Documents\\Teste Ilia\\Desafio-Ilia\\Desafio_Ilia\\Time.Sheet.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Guilherme\\Documents\\Desafio-Ilia\\Time.Sheet.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

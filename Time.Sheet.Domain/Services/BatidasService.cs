@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Time.Sheet.Domain.Models;
+﻿using Time.Sheet.Domain.Models;
 using Time.Sheet.Domain.Repositories;
+using Time.Sheet.Domain.Utils;
 
 namespace Time.Sheet.Domain.Services
 {
@@ -17,49 +13,73 @@ namespace Time.Sheet.Domain.Services
             _registrosRepository = registrosRepository;
         }
 
-        public async Task<Registro> InserirBatidaAsync(Momento momento)
+        public async Task<ResponseResult> InserirBatidaAsync(Momento momento)
         {
-            var dataHora = DateTime.Parse(momento.DataHora);
-            var horario = new Horario(dataHora.TimeOfDay);
-            var registro = await _registrosRepository.ObterRegistroPorDiaAsync(dataHora.Date);
+            if (momento == null || string.IsNullOrEmpty(momento.DataHora))
+            {
+                return new ResponseResult(400, "Campo obrigatório não informado");
+            }
+
+            DateTime dataHora;
+            if (!DateTime.TryParse(momento.DataHora, out dataHora))
+            {
+                return new ResponseResult(400,"Data e hora em formato inválido");
+            }
+
+            if (dataHora.DayOfWeek == DayOfWeek.Saturday || dataHora.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return new ResponseResult(403,"Sábado e domingo não são permitidos como dia de trabalho");
+            }
+
+            DateTime dia = dataHora.Date;
+            TimeSpan hora = dataHora.TimeOfDay;
+
+            Registro registro = await _registrosRepository.ObterRegistroPorDiaAsync(dia);
+
             if (registro == null)
             {
-                registro = new Registro { Dia = dataHora.Date };
-                registro.Horarios.Add(horario);
+                registro = new Registro { Dia = dia };
+            }
+            else
+            {
+                if (registro.Horarios.Any(h => h.DataHora == hora))
+                {
+                    return new ResponseResult(409,"Horário já registrado");
+                }
+
+                if (registro.Horarios.Count >= 4)
+                {
+                    return new ResponseResult(403,"Apenas 4 horários podem ser registrados por dia" );
+                }
+            }
+
+            Horario novoHorario = new Horario(hora);
+            registro.Horarios.Add(novoHorario);
+
+            if (registro.Horarios.Count >= 2 &&
+                registro.Horarios.Any(h => h.Tipo == TipoHorario.SaidaAlmoco) &&
+                registro.Horarios.Any(h => h.Tipo == TipoHorario.EntradaAlmoco) &&
+                novoHorario.Tipo == TipoHorario.EntradaAlmoco)
+            {
+                TimeSpan intervaloAlmoco = registro.Horarios.First(h => h.Tipo == TipoHorario.EntradaAlmoco).DataHora -
+                                           registro.Horarios.First(h => h.Tipo == TipoHorario.SaidaAlmoco).DataHora;
+                if (intervaloAlmoco < TimeSpan.FromHours(1))
+                {
+                    registro.Horarios.Remove(novoHorario);
+                    return new ResponseResult(403, "Deve haver no mínimo 1 hora de almoço");
+                }
+            }
+
+            if (registro.Id == 0)
+            {
                 await _registrosRepository.InserirAsync(registro);
             }
             else
             {
-                var ultimoHorario = registro.Horarios.LastOrDefault();
-                if (ultimoHorario != null && ultimoHorario.Equals(horario))
-                {
-                    throw new ArgumentException("Horário já registrado");
-                }
-                else if (registro.Horarios.Count >= 4)
-                {
-                    throw new ArgumentException("Apenas 4 horários podem ser registrados por dia");
-                }
-                else if (horario.Tipo == TipoHorario.Entrada && ultimoHorario != null && ultimoHorario.Tipo != TipoHorario.Saida)
-                {
-                    throw new ArgumentException("Deve haver no mínimo 1 hora de almoço");
-                }
-                else if (dataHora.DayOfWeek == DayOfWeek.Saturday || dataHora.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    throw new ArgumentException("Sábado e domingo não são permitidos como dia de trabalho");
-                }
-                else
-                {
-                    registro.Horarios.Add(horario);
-                    await _registrosRepository.AtualizarAsync(registro);
-                }
+                await _registrosRepository.UpdateAsync(registro);
             }
-            return registro;
-        }
 
-        public async Task<Registro> ObterRegistroPorIdAsync(int id)
-        {
-            var registro = await _registrosRepository.ObterPorIdAsync(id);
-            return registro;
+            return new ResponseResult(201, "Created");
         }
     }
 }

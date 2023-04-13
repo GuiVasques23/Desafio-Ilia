@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Time.Sheet.Domain.Models
+﻿namespace Time.Sheet.Domain.Models
 {
     public class Registro
     {
