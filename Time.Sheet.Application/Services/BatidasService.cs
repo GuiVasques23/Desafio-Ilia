@@ -1,4 +1,5 @@
-﻿using Time.Sheet.Domain.Models;  
+﻿using System.Globalization;
+using Time.Sheet.Domain.Models;  
 using Time.Sheet.Domain.Services;
 using Time.Sheet.Domain.Utils;
 using Time.Sheet.Infraestructure.Repositories;
@@ -22,7 +23,7 @@ namespace Time.Sheet.Application.Services
                 return new ResponseResult(400, "Campo obrigatório não informado");
             }
 
-            DateTime dataHora;
+            var dataHora = DateTime.ParseExact(momento.DataHora, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
 
             if (!DateTime.TryParse(momento.DataHora, out dataHora))
             {
@@ -45,7 +46,7 @@ namespace Time.Sheet.Application.Services
             }
             else
             {
-                if (registro.Horarios.Any(h => h.DataHora == hora))
+                if (registro.Horarios.Any(h => h.DataHora.TimeOfDay.Equals(hora)))
                 {
                     return new ResponseResult(409, "Horário já registrado");
                 }
@@ -60,7 +61,9 @@ namespace Time.Sheet.Application.Services
             {
                 if (registro.Horarios[i] == null)
                 {
-                    registro.Horarios[i] = new Horario { DataHora = hora };
+                    registro.Horarios[i] = new Horario { 
+                        DataHora = dataHora
+                    };
                     break;
                 }
             }

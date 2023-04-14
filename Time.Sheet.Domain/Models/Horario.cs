@@ -2,11 +2,11 @@
 {
     public class Horario
     {
-        public TimeSpan DataHora { get; set; }
+        public DateTime DataHora { get; set; }
 
         public Horario() { }
 
-        public Horario(TimeSpan dataHora)
+        public Horario(DateTime dataHora)
         {
             DataHora = dataHora;
         }

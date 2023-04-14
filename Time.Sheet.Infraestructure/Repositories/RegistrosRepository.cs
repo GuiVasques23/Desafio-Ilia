@@ -13,6 +13,10 @@ namespace Time.Sheet.Infraestructure.Repositories
     {
         private readonly PontoDbContext _context;
 
+        public RegistrosRepository()
+        {
+        }
+
         public RegistrosRepository(PontoDbContext context)
         {
             _context = context;
