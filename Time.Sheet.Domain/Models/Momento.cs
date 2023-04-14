@@ -4,7 +4,7 @@ namespace Time.Sheet.Domain.Models
 {
     public class Momento
     {
-        public string? DataHora { get; set; }
+        public string DataHora { get; set; }
 
     }
 }

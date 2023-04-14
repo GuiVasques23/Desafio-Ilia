@@ -18,6 +18,18 @@ namespace Time.Sheet.Api.Controllers
             _folhasDePontoService = folhasDePontoService;
         }
 
+        /// <summary>
+        /// Registra um horário da jornada diária de trabalho
+        /// </summary>
+        /// <param name="momento">Momento da batida</param>
+        /// <response code="201">Created</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="409">Conflict</response>
+        [ProducesResponseType(typeof(Registro), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseResult), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ResponseResult), StatusCodes.Status409Conflict)]
         [HttpPost("batidas")]
         public async Task<IActionResult> InsereBatida([FromBody] Momento momento)
         {
@@ -33,7 +45,14 @@ namespace Time.Sheet.Api.Controllers
                 return StatusCode(statusCode, new { message = errorMessage });
             }
         }
-
+        /// <summary>
+        /// Geração de relatório mensal de usuário.
+        /// </summary>
+        /// <param name="mes">Mês de referência</param>
+        /// <response code="200">Relatório mensal</response>
+        /// <response code="404">Relatório não encontrado</response>
+        [ProducesResponseType(typeof(Relatorio), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseResult), StatusCodes.Status404NotFound)]
         [HttpGet("folhas-de-ponto/{mes}")]
         public async Task<IActionResult> ObterFolhaDePontoPorMes(string mes)
         {

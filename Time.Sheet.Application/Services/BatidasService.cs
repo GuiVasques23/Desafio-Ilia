@@ -16,20 +16,22 @@ namespace Time.Sheet.Application.Services
 
         public async Task<ResponseResult> InserirBatidaAsync(Momento momento)
         {
+
             if (momento == null || string.IsNullOrEmpty(momento.DataHora))
             {
                 return new ResponseResult(400, "Campo obrigatório não informado");
             }
 
             DateTime dataHora;
+
             if (!DateTime.TryParse(momento.DataHora, out dataHora))
             {
-                return new ResponseResult(400,"Data e hora em formato inválido");
+                return new ResponseResult(400, "Data e hora em formato inválido");
             }
 
             if (dataHora.DayOfWeek == DayOfWeek.Saturday || dataHora.DayOfWeek == DayOfWeek.Sunday)
             {
-                return new ResponseResult(403,"Sábado e domingo não são permitidos como dia de trabalho");
+                return new ResponseResult(403, "Sábado e domingo não são permitidos como dia de trabalho");
             }
 
             DateTime dia = dataHora.Date;
@@ -39,35 +41,27 @@ namespace Time.Sheet.Application.Services
 
             if (registro == null)
             {
-                registro = new Registro { Dia = dia };
+                registro = new Registro { Dia = dia, Horarios = new Horario[4] };
             }
             else
             {
                 if (registro.Horarios.Any(h => h.DataHora == hora))
                 {
-                    return new ResponseResult(409,"Horário já registrado");
+                    return new ResponseResult(409, "Horário já registrado");
                 }
 
-                if (registro.Horarios.Count >= 4)
+                if (registro.Horarios.Count(h => h != null) >= 4)
                 {
-                    return new ResponseResult(403,"Apenas 4 horários podem ser registrados por dia" );
+                    return new ResponseResult(403, "Apenas 4 horários podem ser registrados por dia");
                 }
             }
 
-            Horario novoHorario = new Horario(hora);
-            registro.Horarios.Add(novoHorario);
-
-            if (registro.Horarios.Count >= 2 &&
-                registro.Horarios.Any(h => h.Tipo == TipoHorario.SaidaAlmoco) &&
-                registro.Horarios.Any(h => h.Tipo == TipoHorario.EntradaAlmoco) &&
-                novoHorario.Tipo == TipoHorario.EntradaAlmoco)
+            for (int i = 0; i < 4; i++)
             {
-                TimeSpan intervaloAlmoco = registro.Horarios.First(h => h.Tipo == TipoHorario.EntradaAlmoco).DataHora -
-                                           registro.Horarios.First(h => h.Tipo == TipoHorario.SaidaAlmoco).DataHora;
-                if (intervaloAlmoco < TimeSpan.FromHours(1))
+                if (registro.Horarios[i] == null)
                 {
-                    registro.Horarios.Remove(novoHorario);
-                    return new ResponseResult(403, "Deve haver no mínimo 1 hora de almoço");
+                    registro.Horarios[i] = new Horario { DataHora = hora };
+                    break;
                 }
             }
 
